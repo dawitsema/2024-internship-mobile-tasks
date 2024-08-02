@@ -1,16 +1,28 @@
-# task_6
+# Product Management App
 
-A new Flutter project.
+This Flutter application allows users to manage products by adding, viewing, searching, updating, and deleting them. The app provides a user-friendly interface to showcase product details, including size selection and price filtering.
+
+## Features
+
+- **View Products**: Display a list of products with images, descriptions, and ratings.
+- **Add Products**: A form to add new products with details such as name, category, image, and price.
+- **Search Products**: Search for products using a search bar and filter by categories.
+- **Product Details**: View detailed information about each product, including images and size options.
+- **Update and Delete Products**: Modify or remove existing products from the list.
+
+## Screens
+
+1. **Home Screen**: Displays all available products with options to search and filter.
+2. **Product Details**: Shows detailed information about a selected product.
+3. **Add Product**: A form to input new product details.
+4. **Update/Delete Product**: Options to update or delete an existing product.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter](https://flutter.dev/docs/get-started/install) installed on your machine.
+- A code editor like [Visual Studio Code](https://code.visualstudio.com/) or [Android Studio](https://developer.android.com/studio).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
