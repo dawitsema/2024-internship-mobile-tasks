@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:task_6/pages/AddPage.dart';
-import 'package:task_6/pages/SearchPage.dart';
+
+import 'pages/AddPage.dart';
 import 'pages/ProductCard.dart';
+import 'pages/SearchPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromRGBO(63, 81, 243, 1),
+        ),
+        useMaterial3: true,
+      ),
+      // ignore: prefer_const_constructors
       home: HomePage(),
     );
   }
@@ -82,7 +89,7 @@ class HomePage extends StatelessWidget {
                     const Center(
                       child: Icon(
                         Icons.notifications,
-                        color: Colors.black,
+                        // color: Colors.white,
                         size: 30,
                       ),
                     ),
@@ -114,7 +121,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Available Products",
+                  'Available Products',
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 26,

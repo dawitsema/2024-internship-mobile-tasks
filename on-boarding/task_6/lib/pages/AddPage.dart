@@ -1,8 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'dart:io';
 
-class Addpage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class Addpage extends StatefulWidget {
   const Addpage({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _AddpageState createState() => _AddpageState();
+}
+
+class _AddpageState extends State<Addpage> {
+  File? _image;
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +40,7 @@ class Addpage extends StatelessWidget {
           ),
         ),
         title: const Text(
-          "Add Product",
+          'Add Product',
           style: TextStyle(
             color: Colors.black,
             fontSize: 16,
@@ -33,28 +55,31 @@ class Addpage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                height: 140,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(243, 243, 243, 1),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                margin: const EdgeInsets.all(10.0),
-                child: const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.image),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        "upload image",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
-                      )
-                    ],
+              GestureDetector(
+                onTap: _pickImage,
+                child: Container(
+                  height: 140,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(243, 243, 243, 1),
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  margin: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: _image == null
+                        ? const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.image),
+                              SizedBox(height: 8),
+                              Text(
+                                "Upload Image",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          )
+                        : Image.file(_image!),
                   ),
                 ),
               ),
@@ -64,21 +89,16 @@ class Addpage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Label
                     const Text(
-                      'name',
+                      'Name',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    // Form Field
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Container(
                       height: 40,
-                      // padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(243, 243, 243, 1),
                         borderRadius: BorderRadius.circular(5.0),
@@ -87,7 +107,7 @@ class Addpage extends StatelessWidget {
                         decoration:
                             const InputDecoration(border: InputBorder.none),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -97,21 +117,16 @@ class Addpage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Label
                     const Text(
-                      'catagory',
+                      'Category',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    // Form Field
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Container(
                       height: 40,
-                      // padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(243, 243, 243, 1),
                         borderRadius: BorderRadius.circular(5.0),
@@ -120,7 +135,7 @@ class Addpage extends StatelessWidget {
                         decoration:
                             const InputDecoration(border: InputBorder.none),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -130,21 +145,16 @@ class Addpage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Label
                     const Text(
-                      'price',
+                      'Price',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    // Form Field
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Container(
                       height: 40,
-                      // padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(243, 243, 243, 1),
                         borderRadius: BorderRadius.circular(5.0),
@@ -152,8 +162,9 @@ class Addpage extends StatelessWidget {
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            suffixIcon: Icon(Icons.attach_money)),
+                          border: InputBorder.none,
+                          suffixIcon: Icon(Icons.attach_money),
+                        ),
                       ),
                     ),
                   ],
@@ -165,21 +176,16 @@ class Addpage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Label
                     const Text(
-                      'description',
+                      'Description',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    // Form Field
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Expanded(
                       child: Container(
-                        // padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: const Color.fromRGBO(243, 243, 243, 1),
                           borderRadius: BorderRadius.circular(8.0),
@@ -192,13 +198,11 @@ class Addpage extends StatelessWidget {
                           textAlignVertical: TextAlignVertical.top,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -218,9 +222,7 @@ class Addpage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
@@ -238,9 +240,7 @@ class Addpage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

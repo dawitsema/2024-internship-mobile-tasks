@@ -30,7 +30,7 @@ class ProductCard extends StatelessWidget {
                     const BorderRadius.vertical(top: Radius.circular(15.0)),
                 child: Image.asset(
                   'images/shoes.jpg',
-                  height: 250,
+                  height: 150,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
