@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'product.dart';
+
 class Detailspage extends StatefulWidget {
-  const Detailspage({super.key});
+  final Product product;
+  const Detailspage({required this.product, super.key});
 
   @override
   State<Detailspage> createState() => _DetailspageState();
@@ -17,14 +20,14 @@ class _DetailspageState extends State<Detailspage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: 230,
               width: double.infinity,
               child: Stack(
                 children: [
                   Positioned.fill(
                     child: Image.asset(
-                      'images/shoes.jpg',
+                      widget.product.imagePath,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -60,9 +63,9 @@ class _DetailspageState extends State<Detailspage> {
               children: [
                 Container(
                   padding: const EdgeInsets.only(left: 20.0),
-                  child: const Text(
-                    "Men's shoe",
-                    style: TextStyle(
+                  child: Text(
+                    widget.product.catagory,
+                    style: const TextStyle(
                       color: Color.fromRGBO(170, 170, 170, 1),
                       fontFamily: 'Poppins',
                       fontSize: 16,
@@ -70,20 +73,20 @@ class _DetailspageState extends State<Detailspage> {
                     ),
                   ),
                 ),
-                const Row(
+                Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.star, color: Colors.yellow, size: 20),
+                    const Icon(Icons.star, color: Colors.yellow, size: 20),
                     Text(
-                      '(4.0)',
-                      style: TextStyle(
+                      widget.product.rating,
+                      style: const TextStyle(
                         color: Color.fromRGBO(170, 170, 170, 1),
                         fontFamily: 'Poppins',
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     )
                   ],
@@ -98,9 +101,9 @@ class _DetailspageState extends State<Detailspage> {
               children: [
                 Container(
                   padding: const EdgeInsets.only(left: 20.0),
-                  child: const Text(
-                    "Derby Leather",
-                    style: TextStyle(
+                  child: Text(
+                    widget.product.title,
+                    style: const TextStyle(
                       color: Color.fromRGBO(62, 62, 62, 1),
                       fontFamily: 'Poppins',
                       fontSize: 24,
@@ -108,19 +111,19 @@ class _DetailspageState extends State<Detailspage> {
                     ),
                   ),
                 ),
-                const Row(
+                Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "\$120",
-                      style: TextStyle(
+                      widget.product.price,
+                      style: const TextStyle(
                         color: Color.fromRGBO(62, 62, 62, 1),
                         fontFamily: 'Poppins',
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     )
                   ],
@@ -133,7 +136,7 @@ class _DetailspageState extends State<Detailspage> {
             Container(
               padding: const EdgeInsets.only(left: 20),
               child: const Text(
-                "Size:",
+                'Size:',
                 style: TextStyle(
                   color: Color.fromRGBO(62, 62, 62, 1),
                   fontFamily: 'Poppins',
@@ -190,12 +193,12 @@ class _DetailspageState extends State<Detailspage> {
               height: 20,
             ),
             Container(
-              height: 200,
-              padding:
-                  const EdgeInsets.only(left: 20, top: 0, right: 16, bottom: 0),
-              child: const Text(
-                  "In order to help those of you who would like to reference our articles in an academic setting, appropriate citation formats using MLA and APA can be found below. Guidelines are based on standard usage of these reference systems as of 2020, and should be checked against your institution’s particular guidelines as appropriate. We do not publish the names of our writers or provide the date published, but all systems have instructions regarding citing a website without author"),
-            ),
+                height: 200,
+                padding: const EdgeInsets.only(
+                    left: 20, top: 0, right: 16, bottom: 0),
+                child: Text(
+                  widget.product.description,
+                )),
             Container(
               padding: const EdgeInsets.only(left: 30, right: 30),
               child: Row(
@@ -213,7 +216,7 @@ class _DetailspageState extends State<Detailspage> {
                       ),
                       onPressed: () {},
                       child: const Text(
-                        "DELETE",
+                        'DELETE',
                         style: TextStyle(color: Colors.red),
                       ),
                     ),
@@ -232,7 +235,7 @@ class _DetailspageState extends State<Detailspage> {
                       ),
                       onPressed: () {},
                       child: const Text(
-                        "UPDATE",
+                        'UPDATE',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
