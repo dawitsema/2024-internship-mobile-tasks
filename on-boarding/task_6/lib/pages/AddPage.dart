@@ -217,7 +217,7 @@ class _AddpageState extends State<Addpage> {
                   ),
                   onPressed: () {},
                   child: const Text(
-                    "ADD",
+                    'ADD',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -235,7 +235,7 @@ class _AddpageState extends State<Addpage> {
                   ),
                   onPressed: () {},
                   child: const Text(
-                    "DELETE",
+                    'DELETE',
                     style: TextStyle(color: Colors.red),
                   ),
                 ),
