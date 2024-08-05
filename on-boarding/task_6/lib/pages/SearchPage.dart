@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'ProductCard.dart';
+import 'product.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  final List<Product> products;
+  const SearchPage({super.key, required this.products});
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -102,9 +104,9 @@ class _SearchPageState extends State<SearchPage> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 4, // Assuming there are 4 items
-                itemBuilder: (context, index) {
-                  return const ProductCard();
+                itemCount: widget.products.length, // Assuming there are 4 items
+                itemBuilder: (context, itemCount) {
+                  return ProductCard(product: widget.products[itemCount]);
                 },
               ),
             ),
