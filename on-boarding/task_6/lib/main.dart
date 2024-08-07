@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-// import 'package:task_6/pages/Product.dart';
-
-import 'pages/AddPage.dart';
+import 'package:flutter/widgets.dart';
+import 'package:task_6/pages/AddPage.dart';
+import 'package:task_6/pages/SearchPage.dart';
 import 'pages/ProductCard.dart';
 import 'pages/SearchPage.dart';
 import 'pages/product.dart';
@@ -59,8 +58,39 @@ class HomePage extends StatelessWidget {
     imagePath: 'images/shoes3.jpg',
     price: '\$129',
   );
+  HomePage({super.key});
+  final Product product1 = Product(
+      title: 'Pacific Bow',
+      catagory: 'Mens Shoes',
+      description:
+          'Style: Sports Season: Winter, Autumn Upper Material: Synthetic Leather Fashion Element: Sewing Line Toe Shape: Round Head Heel Height: Flat Heel Wearing Style: Front Lace-up',
+      rating: '4',
+      imagePath: 'images/shoes2.jpg',
+      price: '\$120');
+
+  final Product product2 = Product(
+      title: 'Sweat-Absorbant',
+      catagory: 'BRAND',
+      description:
+          'Now, create the second screen. The title of the screen contains the title of the todo, and the body of the screen shows the description.',
+      rating: '4',
+      imagePath: 'images/shoes.jpg',
+      price: '\$100');
+
+  final Product product3 = Product(
+    title: 'Running Shoes',
+    catagory: 'Sneaker',
+    description:
+        'To learn clean architecture, two resources have been provided. The first is the Flutter TDD Clean Architecture Course on Reso Coder, which focuses on building a Number Trivia App using clean architecture principles and test-driven development (TDD) in Flutter.',
+    rating: '5',
+    imagePath: 'images/shoes3.jpg',
+    price: '\$129',
+  );
   @override
   Widget build(BuildContext context) {
+    List<Product> products = [];
+
+    products.addAll([product1, product2, product3]);
     List<Product> products = [];
 
     products.addAll([product1, product2, product3]);
@@ -154,6 +184,7 @@ class HomePage extends StatelessWidget {
               children: [
                 const Text(
                   'Available Products',
+                  'Available Products',
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 26,
@@ -178,6 +209,9 @@ class HomePage extends StatelessWidget {
                               return SearchPage(
                                 products: products,
                               );
+                              return SearchPage(
+                                products: products,
+                              );
                             },
                           ),
                         );
@@ -190,7 +224,9 @@ class HomePage extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemCount: 3, // Assuming there are 3 items
+              itemCount: 3, // Assuming there are 3 items
               itemBuilder: (context, index) {
+                return ProductCard(product: products[index]);
                 return ProductCard(product: products[index]);
               },
             ),
