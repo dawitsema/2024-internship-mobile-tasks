@@ -9,6 +9,7 @@
 # packages, and plugins designed to encourage good coding practices.
 analyzer:
   errors:
+    prefer_const_constructors_in_immutables: ignore
     use_super_parameters: ignore
 include: package:flutter_lints/flutter.yaml
 
