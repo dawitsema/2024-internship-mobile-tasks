@@ -7,11 +7,12 @@ import 'pages/SearchPage.dart';
 import 'pages/product.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  var f = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +60,12 @@ class HomePage extends StatelessWidget {
     price: '\$129',
   );
 
-  
   @override
   Widget build(BuildContext context) {
     List<Product> products = [];
 
     products.addAll([product1, product2, product3]);
- 
 
-    
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80.0),
@@ -199,7 +197,6 @@ class HomePage extends StatelessWidget {
               itemCount: 3, // Assuming there are 3 items
               itemBuilder: (context, index) {
                 return ProductCard(product: products[index]);
-            
               },
             ),
           ),
