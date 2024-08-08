@@ -9,7 +9,7 @@ class GetAllProducts {
 
   GetAllProducts(this.productRepository);
 
-  Future<Either<Failure, List<Product>>> execute(required) async {
+  Future<Either<Failure, List<Product>>> execute() async {
     return await productRepository.getAllProducts();
   }
 }

@@ -20,25 +20,25 @@ void main() {
 
   final Product1 = Product(
     id: '1',
-    title: 'shoes',
+    name: 'shoes',
     description: 'best product',
-    category: 'brand',
     price: 23,
-    rating: 5,
     imageUrl: 'imageUrl',
   );
 
   var tProduct = [Product1, Product1];
 
   test('should return List of Product from ProductRepository', () async {
-    //arrange
+    // arrange
     when(mockProductRepository.getAllProducts())
         .thenAnswer((_) async => Right(tProduct));
-    //act
-    final resutl = await usecase.execute(any);
-    //assert
-    expect(resutl, Right(tProduct));
-    verify(mockProductRepository.getAllProducts());
+
+    // act
+    final result = await usecase.execute();
+
+    // assert
+    expect(result, Right(tProduct));
+    verify(mockProductRepository.getAllProducts()).called(1);
     verifyNoMoreInteractions(mockProductRepository);
   });
 }

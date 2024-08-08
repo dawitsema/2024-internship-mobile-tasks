@@ -19,11 +19,9 @@ void main() {
 
   final Product1 = Product(
     id: '1',
-    title: 'shoes',
+    name: 'shoes',
     description: 'best product',
-    category: 'brand',
     price: 23,
-    rating: 5,
     imageUrl: 'imageUrl',
   );
 
