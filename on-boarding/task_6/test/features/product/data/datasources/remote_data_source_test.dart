@@ -136,4 +136,96 @@ void main() {
       expect(call, throwsA(isA<ServerException>()));
     });
   });
+
+  group('update product', () {
+    final tProductModel = ProductModel(
+      id: "6672752cbd218790438efdb0",
+      name: "Anime website",
+      description: "Explore anime characters.",
+      price: 123,
+      imageUrl:
+          "https://res.cloudinary.com/g5-mobile-track/image/upload/v1718777132/images/zxjhzrflkvsjutgbmr0f.jpg",
+    );
+
+    test(
+        'should return a ProductModel when the call to remote data source is successful (200)',
+        () async {
+      // arrange
+      when(mockHttpClient.put(
+        Uri.parse(Urls.updateProduct(tProductModel.id)),
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+      )).thenAnswer((_) async => http.Response(
+            jsonEncode({
+              "data": tProductModel.toJson(),
+            }),
+            200,
+          ));
+
+      // act
+      final result =
+          await productRemoteDataSourceImpl.updateProduct(tProductModel);
+
+      // assert
+      expect(result, tProductModel);
+    });
+
+    test(
+        'should throw server exception when the response code is 400 or others',
+        () async {
+      // arrange
+      when(mockHttpClient.put(
+        Uri.parse(Urls.updateProduct(tProductModel.id)),
+        headers: anyNamed('headers'),
+        body: anyNamed('body'),
+      )).thenAnswer((_) async => http.Response('Bad request', 400));
+
+      // act
+      final call = productRemoteDataSourceImpl.updateProduct(tProductModel);
+
+      // assert
+      expect(call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('delete product', () {
+    final tProductId = "6672940692adcb386d593686";
+
+    test(
+        'should complete without throwing an exception when the call to remote data source is successful (200)',
+        () async {
+      // arrange
+      when(mockHttpClient.delete(
+        Uri.parse(Urls.deleteProduct(tProductId)),
+        headers: anyNamed('headers'),
+      )).thenAnswer((_) async => http.Response(
+            jsonEncode({
+              "statusCode": 200,
+              "message": "",
+            }),
+            200,
+          ));
+
+      // act
+      final call = productRemoteDataSourceImpl.deleteProduct(tProductId);
+
+      // assert
+      expect(call, completes);
+    });
+
+    test('should throw ServerException when the response code is 400 or others',
+        () async {
+      // arrange
+      when(mockHttpClient.delete(
+        Uri.parse(Urls.deleteProduct(tProductId)),
+        headers: anyNamed('headers'),
+      )).thenAnswer((_) async => http.Response('Bad request', 400));
+
+      // act
+      final call = productRemoteDataSourceImpl.deleteProduct(tProductId);
+
+      // assert
+      expect(call, throwsA(isA<ServerException>()));
+    });
+  });
 }
