@@ -5,7 +5,7 @@ class ProductModel extends Product {
     required String id,
     required String name,
     required String description,
-    required double price,
+    required int price,
     required String imageUrl,
   }) : super(
           description: description,
@@ -15,12 +15,23 @@ class ProductModel extends Product {
           name: name,
         );
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      price: json['price'],
-      imageUrl: json['imageUrl']);
+  static List<ProductModel> getAllProducts(List<dynamic> jsons) {
+    List<ProductModel> products = [];
+    for (dynamic product in jsons) {
+      products.add(ProductModel.fromJson(product));
+    }
+    return products;
+  }
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      id: json['id'] ?? '', // Default to an empty string if null
+      name: json['name'] ?? '',
+      description: json['description'] ?? '',
+      price: json['price'] ?? 0, // Default to 0 if null
+      imageUrl: json['imageUrl'] ?? '',
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,

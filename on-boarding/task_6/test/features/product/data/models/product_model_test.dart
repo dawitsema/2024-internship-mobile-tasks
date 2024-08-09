@@ -8,13 +8,12 @@ import '../../helpers/dummy_data/json_reader.dart';
 
 void main() {
   final tProductModel = ProductModel(
-    id: "6672776eb905525c145fe0bb",
-    name: "Anime website",
-    description: "Explore anime characters.",
-    price: 4.0,
-    imageUrl:
-        "https://res.cloudinary.com/g5-mobile-track/image/upload/v1718777711/images/clmxnecvavxfvrz9by4w.jpg",
-  );
+      id: "6672776eb905525c145fe0bb",
+      name: "Anime website",
+      description: "Explore anime characters.",
+      price: 123,
+      imageUrl:
+          "https://res.cloudinary.com/g5-mobile-track/image/upload/v1718777711/images/clmxnecvavxfvrz9by4w.jpg");
   test('should be a sub class of product entity', () async {
     //assert
     expect(tProductModel, isA<Product>());
@@ -23,9 +22,8 @@ void main() {
   test('should return a valid model from json', () async {
     //arrange
     final Map<String, dynamic> jsonMap = json.decode(
-      readJson('product_response.json'),
+      readJson('create_response.json'),
     );
-    print(jsonMap);
     //act
     final result = ProductModel.fromJson(jsonMap);
 
@@ -39,12 +37,12 @@ void main() {
 
     //assert
     final expectedJsonMap = {
-      "id": "6672776eb905525c145fe0bb",
-      "name": "Anime website",
-      "description": "Explore anime characters.",
-      "price": 4.0,
-      "imageUrl":
-          "https://res.cloudinary.com/g5-mobile-track/image/upload/v1718777711/images/clmxnecvavxfvrz9by4w.jpg"
+      'id': '6672776eb905525c145fe0bb',
+      'name': 'Anime website',
+      'imageUrl':
+          'https://res.cloudinary.com/g5-mobile-track/image/upload/v1718777711/images/clmxnecvavxfvrz9by4w.jpg',
+      'price': 123,
+      'description': 'Explore anime characters.'
     };
 
     expect(result, expectedJsonMap);
