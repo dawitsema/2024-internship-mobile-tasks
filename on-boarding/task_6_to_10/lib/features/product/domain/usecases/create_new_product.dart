@@ -9,7 +9,7 @@ class CreateNewProduct {
 
   CreateNewProduct(this.productRepository);
 
-  Future<Either<Failure, Product>> execute({required Product product}) async {
+  Future<Either<Failure, Product>> call(Product product) async {
     return await productRepository.createNewProduct(product);
   }
 }

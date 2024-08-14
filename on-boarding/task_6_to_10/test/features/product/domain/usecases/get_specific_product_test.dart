@@ -30,7 +30,7 @@ void main() {
     when(mockProductRepository.getSpecificProduct(tId))
         .thenAnswer((_) async => Right(Product1));
     //act
-    final resutl = await usecase.execute(id: tId);
+    final resutl = await usecase(tId);
     //assert
     expect(resutl, Right(Product1));
     verify(mockProductRepository.getSpecificProduct(tId));

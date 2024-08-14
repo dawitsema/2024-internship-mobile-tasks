@@ -23,7 +23,7 @@ void main() {
     when(mockProductRepository.deleteProduct(tId))
         .thenAnswer((_) async => Right(Void));
     //act
-    final resutl = await usecase.execute(id: tId);
+    final resutl = await usecase(tId);
     //assert
     expect(resutl, Right(Void));
     verify(mockProductRepository.deleteProduct(tId));

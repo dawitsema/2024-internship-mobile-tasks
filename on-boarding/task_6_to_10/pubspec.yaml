@@ -22,21 +22,24 @@ dependencies:
   # Value equality
   equatable: ^2.0.5
   # Remote API
-  connectivity_plus: ^4.0.2
   http: ^1.0.0
+  internet_connection_checker: ^1.0.0+1
 
   rxdart: ^0.28.0
   # Local cache
   shared_preferences: ^2.1.1
   image_picker: ^1.1.2
+  bloc: ^8.1.4
+  dev: ^1.0.0
+  analyzer: 6.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   bloc_test: ^9.1.1
-  build_runner: ^2.4.7
+  build_runner: ^2.4.12
   mockito: ^5.4.3
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 # The following section is specific to Flutter packages.
 flutter:

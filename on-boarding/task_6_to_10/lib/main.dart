@@ -180,9 +180,6 @@ class HomePage extends StatelessWidget {
                               return SearchPage(
                                 products: products,
                               );
-                              return SearchPage(
-                                products: products,
-                              );
                             },
                           ),
                         );

@@ -9,7 +9,7 @@ class GetSpecificProduct {
 
   GetSpecificProduct(this.productRepository);
 
-  Future<Either<Failure, Product>> execute({required String id}) async {
+  Future<Either<Failure, Product>> call(String id) async {
     return await productRepository.getSpecificProduct(id);
   }
 }

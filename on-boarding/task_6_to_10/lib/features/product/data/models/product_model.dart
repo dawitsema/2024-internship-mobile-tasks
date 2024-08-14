@@ -40,4 +40,15 @@ class ProductModel extends Product {
         'price': price,
         'description': description,
       };
+
+
+  Product toEntity() {
+    return Product(
+      id: id,
+      name: name,
+      description: description,
+      price: price,
+      imageUrl: imageUrl,
+    );
+  }
 }

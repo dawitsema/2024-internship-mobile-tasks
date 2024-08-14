@@ -28,7 +28,7 @@ void main() {
     when(mockProductRepository.updateProduct(Product1))
         .thenAnswer((_) async => Right(Product1));
     //act
-    final resutl = await usecase.execute(product: Product1);
+    final resutl = await usecase(Product1);
     //assert
     expect(resutl, Right(Product1));
     verify(mockProductRepository.updateProduct(Product1));
