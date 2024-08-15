@@ -116,6 +116,14 @@ class _SearchPageState extends State<SearchPage> {
                       },
                     ),
                   );
+                } else if (state is LoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is ErrorState) {
+                  return Center(
+                    child: Text(state.message),
+                  );
                 }
                 return const SizedBox();
               },

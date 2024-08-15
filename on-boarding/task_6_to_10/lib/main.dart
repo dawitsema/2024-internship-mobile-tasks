@@ -200,7 +200,7 @@ class HomePage extends StatelessWidget {
             },
             builder: (context, state) {
               if (state is LoadingState) {
-                return const Center(
+                return Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state is LoadedAllProductState) {
