@@ -23,3 +23,7 @@ class DatabaseFailure extends Failure {
 class CacheFailure extends Failure {
   const CacheFailure(String message) : super(message);
 }
+
+class LocalDataSourceFailure extends Failure {
+  const LocalDataSourceFailure(String message) : super(message);
+}

@@ -23,18 +23,38 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     required this.deleteProduct,
     required this.createNewProduct,
   }) : super(InitialState()) {
-    //handle initiale state to load all products
-    // add(LoadAllProductEvent());
-
-    // Handle LoadAllProductEvent
     on<LoadAllProductEvent>((event, emit) async {
       emit(LoadingState());
       final failureOrProducts = await getAllProducts();
+
       failureOrProducts.fold(
-        (failure) => emit(ErrorState("Failed to load products")),
-        (products) => emit(LoadedAllProductState(products)),
+        (failure) {
+          emit(ErrorState(failure.message));
+        },
+        (products) {
+          emit(LoadedAllProductState(products));
+        },
       );
     });
+
+    // // Handle LoadAllProductEvent
+    // on<LoadAllProductEvent>((event, emit) async {
+    //   emit(LoadingState());
+    //   final failureOrProducts = await getAllProducts();
+    //   failureOrProducts.fold(
+    //     (failure) => emit(ErrorState("Failed to load products")),
+    //     (products) => emit(LoadedAllProductState(products)),
+    //   );
+    // });
+
+    // on<LoadAllProductEvent>((event, emit) async {
+    //   emit(LoadingState());
+    //   final failureOrProducts = await getAllProducts();
+    //   failureOrProducts.fold(
+    //     (failure) => emit(ErrorState(failure.message)),
+    //     (products) => emit(LoadedAllProductState(products)),
+    //   );
+    // });
 
     // Handle GetSingleProductEvent
     on<GetSpecificProductEvent>((event, emit) async {

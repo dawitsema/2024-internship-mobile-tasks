@@ -27,7 +27,6 @@ class ProductRepositoryImpl extends ProductRepository {
     if (await networkInfo.isConnected) {
       try {
         final remoteProduct = await remoteDataSource.getSpecificProduct(id);
-        // Optionally, you could cache this specific product if needed
         return Right(remoteProduct);
       } catch (e) {
         return Left(ServerFailure(e.toString()));
@@ -57,25 +56,45 @@ class ProductRepositoryImpl extends ProductRepository {
     }
   }
 
+  // @override
+  // Future<Either<Failure, List<Product>>> getAllProducts() async {
+  //   if (await networkInfo.isConnected) {
+  //     try {
+  //       final remoteProducts = await remoteDataSource.getAllProducts();
+  //       localDataSource.cacheProducts(remoteProducts);
+  //       return Right(remoteProducts);
+  //     } catch (e) {
+  //       return Left(ServerFailure(e.toString()));
+  //     }
+  //   } else {
+  //     try {
+  //       final localProducts = await localDataSource.getAllProducts();
+  //       return Right(localProducts);
+  //     } catch (e) {
+  //       return Left(CacheFailure(e.toString()));
+  //     }
+  //   }
+  // }
+
   @override
   Future<Either<Failure, List<Product>>> getAllProducts() async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteProducts = await remoteDataSource.getAllProducts();
-        localDataSource.cacheProducts(remoteProducts);
-        return Right(remoteProducts);
-      } catch (e) {
-        return Left(ServerFailure(e.toString()));
+        final products = await remoteDataSource.getAllProducts();
+        localDataSource.cacheProducts(products);
+        return Right(products);
+      } on ServerFailure {
+        return Left(ServerFailure("Server Failure"));
       }
     } else {
       try {
-        final localProducts = await localDataSource.getAllProducts();
-        return Right(localProducts);
-      } catch (e) {
-        return Left(CacheFailure(e.toString()));
+        final products = await localDataSource.getAllProducts();
+        return Right(products);
+      } on LocalDataSourceFailure {
+        return Left(LocalDataSourceFailure('Failed to get products'));
       }
     }
-  }
+  } // Ge
 
   @override
   Future<Either<Failure, Product>> createNewProduct(Product product) {

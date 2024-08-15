@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_6/features/product/presentation/bloc/product_bloc.dart';
 
 import 'ProductCard.dart';
-import 'product.dart';
 
 class SearchPage extends StatefulWidget {
-  final List<Product> products;
-  const SearchPage({super.key, required this.products});
+  const SearchPage({super.key});
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -102,13 +102,23 @@ class _SearchPageState extends State<SearchPage> {
             const SizedBox(
               height: 10,
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: widget.products.length, // Assuming there are 4 items
-                itemBuilder: (context, itemCount) {
-                  return ProductCard(product: widget.products[itemCount]);
-                },
-              ),
+            BlocConsumer<ProductBloc, ProductState>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, state) {
+                if (state is LoadedAllProductState) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: state.products.length,
+                      itemBuilder: (context, index) {
+                        return ProductCard(product: state.products[index]);
+                      },
+                    ),
+                  );
+                }
+                return const SizedBox();
+              },
             ),
             Container(
               padding: const EdgeInsets.all(13),

@@ -31,13 +31,13 @@ dependencies:
   image_picker: ^1.1.2
   bloc: ^8.1.4
   dev: ^1.0.0
-  analyzer: 6.4.1
+  analyzer: ^6.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   bloc_test: ^9.1.1
-  build_runner: ^2.4.12
+  # build_runner: ^2.4.12
   mockito: ^5.4.3
   flutter_lints: ^4.0.0
 

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:task_6/pages/AddPage.dart';
-import 'package:task_6/pages/SearchPage.dart';
-import 'pages/ProductCard.dart';
-import 'pages/SearchPage.dart';
-import 'pages/product.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_6/features/product/presentation/bloc/product_bloc.dart';
+import 'package:task_6/features/product/presentation/pages/AddPage.dart';
+import 'package:task_6/features/product/presentation/pages/ProductCard.dart';
+import 'package:task_6/features/product/presentation/pages/SearchPage.dart';
+import 'package:task_6/service_locator.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator();
   runApp(MyApp());
 }
 
@@ -16,55 +18,60 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromRGBO(63, 81, 243, 1),
+    return BlocProvider(
+      create: (context) =>
+          serviceLocator<ProductBloc>()..add(LoadAllProductEvent()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromRGBO(63, 81, 243, 1),
+          ),
+          useMaterial3: true,
         ),
-        useMaterial3: true,
+        // ignore: prefer_const_constructors
+        home: HomePage(),
       ),
-      // ignore: prefer_const_constructors
-      home: HomePage(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-  final Product product1 = Product(
-      title: 'Pacific Bow',
-      catagory: 'Mens Shoes',
-      description:
-          'Style: Sports Season: Winter, Autumn Upper Material: Synthetic Leather Fashion Element: Sewing Line Toe Shape: Round Head Heel Height: Flat Heel Wearing Style: Front Lace-up',
-      rating: '4',
-      imagePath: 'images/shoes2.jpg',
-      price: '\$120');
 
-  final Product product2 = Product(
-      title: 'Sweat-Absorbant',
-      catagory: 'BRAND',
-      description:
-          'Now, create the second screen. The title of the screen contains the title of the todo, and the body of the screen shows the description.',
-      rating: '4',
-      imagePath: 'images/shoes.jpg',
-      price: '\$100');
+  // final Product product1 = Product(
+  //     title: 'Pacific Bow',
+  //     catagory: 'Mens Shoes',
+  //     description:
+  //         'Style: Sports Season: Winter, Autumn Upper Material: Synthetic Leather Fashion Element: Sewing Line Toe Shape: Round Head Heel Height: Flat Heel Wearing Style: Front Lace-up',
+  //     rating: '4',
+  //     imagePath: 'images/shoes2.jpg',
+  //     price: '\$120');
 
-  final Product product3 = Product(
-    title: 'Running Shoes',
-    catagory: 'Sneaker',
-    description:
-        'To learn clean architecture, two resources have been provided. The first is the Flutter TDD Clean Architecture Course on Reso Coder, which focuses on building a Number Trivia App using clean architecture principles and test-driven development (TDD) in Flutter.',
-    rating: '5',
-    imagePath: 'images/shoes3.jpg',
-    price: '\$129',
-  );
+  // final Product product2 = Product(
+  //     title: 'Sweat-Absorbant',
+  //     catagory: 'BRAND',
+  //     description:
+  //         'Now, create the second screen. The title of the screen contains the title of the todo, and the body of the screen shows the description.',
+  //     rating: '4',
+  //     imagePath: 'images/shoes.jpg',
+  //     price: '\$100');
+
+  // final Product product3 = Product(
+  //   title: 'Running Shoes',
+  //   catagory: 'Sneaker',
+  //   description:
+  //       'To learn clean architecture, two resources have been provided. The first is the Flutter TDD Clean Architecture Course on Reso Coder, which focuses on building a Number Trivia App using clean architecture principles and test-driven development (TDD) in Flutter.',
+  //   rating: '5',
+  //   imagePath: 'images/shoes3.jpg',
+  //   price: '\$129',
+  // );
 
   @override
   Widget build(BuildContext context) {
-    List<Product> products = [];
+    // List<Product> products = [];
 
-    products.addAll([product1, product2, product3]);
+    // products.addAll([product1, product2, product3]);
 
     return Scaffold(
       appBar: PreferredSize(
@@ -177,9 +184,7 @@ class HomePage extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) {
-                              return SearchPage(
-                                products: products,
-                              );
+                              return SearchPage();
                             },
                           ),
                         );
@@ -189,13 +194,31 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 3, // Assuming there are 3 items
-              itemBuilder: (context, index) {
-                return ProductCard(product: products[index]);
-              },
-            ),
+          BlocConsumer<ProductBloc, ProductState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              if (state is LoadingState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is LoadedAllProductState) {
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: state.products.length,
+                    itemBuilder: (context, index) {
+                      return ProductCard(product: state.products[index]);
+                    },
+                  ),
+                );
+              } else if (state is ErrorState) {
+                return Center(
+                  child: Text(state.message),
+                );
+              }
+              return const SizedBox();
+            },
           ),
         ],
       ),

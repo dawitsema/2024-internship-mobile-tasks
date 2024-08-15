@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'product.dart';
+import 'package:task_6/features/product/domain/entities/product.dart';
 
 class Detailspage extends StatefulWidget {
   final Product product;
@@ -27,7 +26,7 @@ class _DetailspageState extends State<Detailspage> {
                 children: [
                   Positioned.fill(
                     child: Image.asset(
-                      widget.product.imagePath,
+                      widget.product.imageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -64,7 +63,7 @@ class _DetailspageState extends State<Detailspage> {
                 Container(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Text(
-                    widget.product.catagory,
+                    'Shoe',
                     style: const TextStyle(
                       color: Color.fromRGBO(170, 170, 170, 1),
                       fontFamily: 'Poppins',
@@ -78,7 +77,7 @@ class _DetailspageState extends State<Detailspage> {
                   children: [
                     const Icon(Icons.star, color: Colors.yellow, size: 20),
                     Text(
-                      widget.product.rating,
+                      '5.8',
                       style: const TextStyle(
                         color: Color.fromRGBO(170, 170, 170, 1),
                         fontFamily: 'Poppins',
@@ -102,7 +101,7 @@ class _DetailspageState extends State<Detailspage> {
                 Container(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Text(
-                    widget.product.title,
+                    widget.product.name,
                     style: const TextStyle(
                       color: Color.fromRGBO(62, 62, 62, 1),
                       fontFamily: 'Poppins',
@@ -115,7 +114,7 @@ class _DetailspageState extends State<Detailspage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      widget.product.price,
+                      widget.product.price.toString(),
                       style: const TextStyle(
                         color: Color.fromRGBO(62, 62, 62, 1),
                         fontFamily: 'Poppins',
