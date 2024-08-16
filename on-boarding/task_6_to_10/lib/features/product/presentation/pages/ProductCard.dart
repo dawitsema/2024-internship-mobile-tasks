@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_6/features/product/data/models/product_model.dart';
 import '../../domain/entities/product.dart';
 import 'DetailsPage.dart';
 
@@ -19,7 +20,12 @@ class ProductCard extends StatelessWidget {
               builder: (BuildContext context) {
                 // Pass the actual product instance, not the type 'Product'
                 return Detailspage(
-                  product: product, // corrected this line
+                  product: ProductModel(
+                      id: product.id,
+                      name: product.name,
+                      description: product.description,
+                      price: product.price,
+                      imageUrl: product.imageUrl), // corrected this line
                 );
               },
             ),

@@ -30,3 +30,13 @@ class AddedProductState extends ProductState {
   final String message;
   AddedProductState(this.message);
 }
+
+class DeletedProductState extends ProductState {
+  final String message;
+  DeletedProductState(this.message);
+}
+
+class UpdatedProductState extends ProductState {
+  final String message;
+  UpdatedProductState(this.message);
+}

@@ -73,7 +73,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       final failureOrSuccess = await updateProduct(event.product);
       failureOrSuccess.fold(
         (failure) => emit(ErrorState("Failed to update product")),
-        (_) => emit(InitialState()), // Or emit a specific success state
+        (_) => emit(UpdatedProductState(
+            "Product updated Successfuly!")), // Or emit a specific success state
       );
     });
 
@@ -83,7 +84,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       final failureOrSuccess = await deleteProduct(event.productId);
       failureOrSuccess.fold(
         (failure) => emit(ErrorState("Failed to delete product")),
-        (_) => emit(InitialState()), // Or emit a specific success state
+        (_) => emit(DeletedProductState(
+            "Product deleted Successfuly!")), // Or emit a specific success state
       );
     });
 
