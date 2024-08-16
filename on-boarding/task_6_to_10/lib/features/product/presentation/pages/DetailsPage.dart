@@ -25,7 +25,7 @@ class _DetailspageState extends State<Detailspage> {
               child: Stack(
                 children: [
                   Positioned.fill(
-                    child: Image.asset(
+                    child: Image.network(
                       widget.product.imageUrl,
                       fit: BoxFit.cover,
                     ),

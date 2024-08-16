@@ -134,40 +134,42 @@ class MockProductRepository extends _i1.Mock implements _i4.ProductRepository {
       ) as _i6.Future<_i2.Either<_i7.Failure, _i8.Product>>);
 
   @override
-  _i6.Future<_i2.Either<_i7.Failure, _i8.Product>> createNewProduct(
-          _i8.Product? product) =>
+  _i6.Future<_i2.Either<_i7.Failure, _i3.ProductModel>> createNewProduct(
+          _i3.ProductModel? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #createNewProduct,
           [product],
         ),
-        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.Product>>.value(
-            _FakeEither_0<_i7.Failure, _i8.Product>(
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i3.ProductModel>>.value(
+                _FakeEither_0<_i7.Failure, _i3.ProductModel>(
           this,
           Invocation.method(
             #createNewProduct,
             [product],
           ),
         )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.Product>>);
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i3.ProductModel>>);
 
   @override
-  _i6.Future<_i2.Either<_i7.Failure, _i8.Product>> updateProduct(
-          _i8.Product? product) =>
+  _i6.Future<_i2.Either<_i7.Failure, _i3.ProductModel>> updateProduct(
+          _i3.ProductModel? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateProduct,
           [product],
         ),
-        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.Product>>.value(
-            _FakeEither_0<_i7.Failure, _i8.Product>(
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i3.ProductModel>>.value(
+                _FakeEither_0<_i7.Failure, _i3.ProductModel>(
           this,
           Invocation.method(
             #updateProduct,
             [product],
           ),
         )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.Product>>);
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i3.ProductModel>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, void>> deleteProduct(String? id) =>

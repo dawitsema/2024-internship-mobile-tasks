@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:task_6/features/product/data/models/product_model.dart';
 
 import '../../../../core/error/failures.dart';
 import '../entities/product.dart';
@@ -9,7 +10,7 @@ class UpdateProduct {
 
   UpdateProduct(this.productRepository);
 
-  Future<Either<Failure, Product>> call(Product product) async {
+  Future<Either<Failure, ProductModel>> call(ProductModel product) async {
     return await productRepository.updateProduct(product);
   }
 }

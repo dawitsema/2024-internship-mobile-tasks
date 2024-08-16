@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:task_6/features/product/data/models/product_model.dart';
 import 'package:task_6/features/product/domain/entities/product.dart';
 import 'package:task_6/features/product/domain/usecases/update_product.dart';
 
@@ -15,7 +16,7 @@ void main() {
     usecase = UpdateProduct(mockProductRepository);
   });
 
-  final Product1 = Product(
+  final Product1 = ProductModel(
     id: '1',
     name: 'shoes',
     description: 'best product',

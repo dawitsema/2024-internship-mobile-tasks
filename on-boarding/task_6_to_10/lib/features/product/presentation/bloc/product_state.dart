@@ -25,3 +25,8 @@ class ErrorState extends ProductState {
   final String message;
   ErrorState(this.message);
 }
+
+class AddedProductState extends ProductState {
+  final String message;
+  AddedProductState(this.message);
+}

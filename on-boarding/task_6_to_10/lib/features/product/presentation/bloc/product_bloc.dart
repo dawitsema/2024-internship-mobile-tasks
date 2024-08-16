@@ -5,6 +5,7 @@ import 'package:task_6/features/product/domain/usecases/delete_product.dart';
 import 'package:task_6/features/product/domain/usecases/get_all_products.dart';
 import 'package:task_6/features/product/domain/usecases/get_specific_product.dart';
 import 'package:task_6/features/product/domain/usecases/update_product.dart';
+import 'package:task_6/features/product/data/models/product_model.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';
@@ -90,9 +91,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<CreateProductEvent>((event, emit) async {
       emit(LoadingState());
       final failureOrSuccess = await createNewProduct(event.product);
+      print(failureOrSuccess);
       failureOrSuccess.fold(
         (failure) => emit(ErrorState("Failed to create product")),
-        (_) => emit(InitialState()), // Or emit a specific success state
+        (_) => emit(AddedProductState(
+            "Product added Successfuly")), // Or emit a specific success state
       );
     });
   }

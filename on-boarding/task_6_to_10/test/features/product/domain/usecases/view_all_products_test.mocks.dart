@@ -8,6 +8,7 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:task_6/core/error/failures.dart' as _i5;
+import 'package:task_6/features/product/data/models/product_model.dart' as _i7;
 import 'package:task_6/features/product/domain/entities/product.dart' as _i6;
 import 'package:task_6/features/product/domain/repositories/product_repository.dart'
     as _i3;
@@ -80,40 +81,42 @@ class MockProductRepository extends _i1.Mock implements _i3.ProductRepository {
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.Product>> createNewProduct(
-          _i6.Product? product) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i7.ProductModel>> createNewProduct(
+          _i7.ProductModel? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #createNewProduct,
           [product],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>.value(
-            _FakeEither_0<_i5.Failure, _i6.Product>(
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i7.ProductModel>>.value(
+                _FakeEither_0<_i5.Failure, _i7.ProductModel>(
           this,
           Invocation.method(
             #createNewProduct,
             [product],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i7.ProductModel>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.Product>> updateProduct(
-          _i6.Product? product) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i7.ProductModel>> updateProduct(
+          _i7.ProductModel? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateProduct,
           [product],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>.value(
-            _FakeEither_0<_i5.Failure, _i6.Product>(
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i7.ProductModel>>.value(
+                _FakeEither_0<_i5.Failure, _i7.ProductModel>(
           this,
           Invocation.method(
             #updateProduct,
             [product],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i7.ProductModel>>);
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, void>> deleteProduct(String? id) =>

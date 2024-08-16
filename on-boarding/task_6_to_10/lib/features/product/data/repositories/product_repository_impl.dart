@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:task_6/core/error/exceptions.dart';
 import 'package:task_6/core/error/failures.dart';
 import 'package:task_6/features/product/data/datasources/product_local_data_source.dart';
 import 'package:task_6/features/product/data/datasources/product_remote_data_source.dart';
@@ -10,7 +7,6 @@ import 'package:task_6/features/product/domain/entities/product.dart';
 import 'package:task_6/features/product/domain/repositories/product_repository.dart';
 
 import '../../../../core/network/network_info.dart';
-import 'package:meta/meta.dart';
 
 class ProductRepositoryImpl extends ProductRepository {
   final ProductRemoteDataSource remoteDataSource;
@@ -46,10 +42,9 @@ class ProductRepositoryImpl extends ProductRepository {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.deleteProduct(id);
-        // Optionally, you could remove the product from the local cache
         return const Right(null);
-      } catch (e) {
-        return Left(ServerFailure(e.toString()));
+      } on ServerFailure {
+        return Left(ServerFailure("Server Failure"));
       }
     } else {
       return Left(ConnectionFailure('No internet connection'));
@@ -97,13 +92,18 @@ class ProductRepositoryImpl extends ProductRepository {
   } // Ge
 
   @override
-  Future<Either<Failure, Product>> createNewProduct(Product product) {
-    // TODO: implement createNewProduct
-    throw UnimplementedError();
+  Future<Either<Failure, ProductModel>> createNewProduct(
+      ProductModel product) async {
+    try {
+      final results = await remoteDataSource.createNewProduct(product);
+      return Right(results);
+    } catch (e) {
+      return Left(ServerFailure('Server: Failed to add product $e'));
+    }
   }
 
   @override
-  Future<Either<Failure, Product>> updateProduct(Product product) {
+  Future<Either<Failure, ProductModel>> updateProduct(ProductModel product) {
     // TODO: implement updateProduct
     throw UnimplementedError();
   }

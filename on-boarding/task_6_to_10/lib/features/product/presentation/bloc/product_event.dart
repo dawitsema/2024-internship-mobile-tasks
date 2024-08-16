@@ -13,7 +13,7 @@ class GetSpecificProductEvent extends ProductEvent {
 
 // Update product details
 class UpdateProductEvent extends ProductEvent {
-  final Product product;
+  final ProductModel product;
   UpdateProductEvent(this.product);
 }
 
@@ -25,6 +25,6 @@ class DeleteProductEvent extends ProductEvent {
 
 // Create a new product
 class CreateProductEvent extends ProductEvent {
-  final Product product;
+  final ProductModel product;
   CreateProductEvent(this.product);
 }
