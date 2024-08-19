@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:task_6/features/product/presentation/bloc/product_bloc.dart';
 import 'package:task_6/features/product/presentation/pages/AddPage.dart';
 import 'package:task_6/features/product/presentation/pages/ProductCard.dart';
@@ -7,7 +8,12 @@ import 'package:task_6/features/product/presentation/pages/SearchPage.dart';
 import 'package:task_6/service_locator.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await Future.delayed(
+    Duration(seconds: 5),
+  );
+  FlutterNativeSplash.remove();
   await setupLocator();
   runApp(MyApp());
 }
