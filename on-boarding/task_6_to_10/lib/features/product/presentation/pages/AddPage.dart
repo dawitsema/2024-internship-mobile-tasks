@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:task_6/features/product/data/models/product_model.dart';
-import 'package:task_6/features/product/domain/entities/product.dart';
-import 'package:task_6/main.dart';
 
 import '../bloc/product_bloc.dart';
+import 'HomePage.dart';
 
 class Addpage extends StatefulWidget {
   final ProductModel? product;
@@ -108,7 +107,7 @@ class _AddpageState extends State<Addpage> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return HomePage();
+                  return Homepage();
                 },
               ),
             );

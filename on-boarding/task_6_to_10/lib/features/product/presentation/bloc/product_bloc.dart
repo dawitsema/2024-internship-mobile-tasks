@@ -38,25 +38,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       );
     });
 
-    // // Handle LoadAllProductEvent
-    // on<LoadAllProductEvent>((event, emit) async {
-    //   emit(LoadingState());
-    //   final failureOrProducts = await getAllProducts();
-    //   failureOrProducts.fold(
-    //     (failure) => emit(ErrorState("Failed to load products")),
-    //     (products) => emit(LoadedAllProductState(products)),
-    //   );
-    // });
-
-    // on<LoadAllProductEvent>((event, emit) async {
-    //   emit(LoadingState());
-    //   final failureOrProducts = await getAllProducts();
-    //   failureOrProducts.fold(
-    //     (failure) => emit(ErrorState(failure.message)),
-    //     (products) => emit(LoadedAllProductState(products)),
-    //   );
-    // });
-
     // Handle GetSingleProductEvent
     on<GetSpecificProductEvent>((event, emit) async {
       emit(LoadingState());

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_6/features/product/data/models/product_model.dart';
-import 'package:task_6/features/product/domain/entities/product.dart';
 import 'package:task_6/features/product/presentation/bloc/product_bloc.dart';
 import 'package:task_6/features/product/presentation/pages/UpdatePage.dart';
 

@@ -18,7 +18,7 @@ class UserModel extends UserEntity {
       id: json['id'] ?? json['_id'],
       name: json['name'],
       email: json['email'],
-      accessToken: json['access_token'],
+      accessToken: json['access_token'] ?? '',
     );
   }
 

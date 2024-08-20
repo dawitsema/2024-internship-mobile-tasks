@@ -12,8 +12,16 @@ import 'package:task_6/features/product/domain/usecases/delete_product.dart';
 import 'package:task_6/features/product/domain/usecases/get_all_products.dart';
 import 'package:task_6/features/product/domain/usecases/get_specific_product.dart';
 import 'package:task_6/features/product/domain/usecases/update_product.dart';
+import 'package:task_6/features/user/data/datasources/user_local_data_source.dart';
+import 'package:task_6/features/user/domain/repositories/user_repository.dart';
+import 'package:task_6/features/user/domain/usecases/get_user_usecase.dart';
+import 'package:task_6/features/user/domain/usecases/login_usecase.dart';
 
 import 'features/product/presentation/bloc/product_bloc.dart';
+import 'features/user/data/datasources/user_remote_data_source.dart';
+import 'features/user/data/repository/user_repository_impl.dart';
+import 'features/user/domain/usecases/register_usecase.dart';
+import 'features/user/presentation/bloc/user_bloc.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -43,6 +51,12 @@ Future<void> setupLocator() async {
   serviceLocator.registerLazySingleton<ProductRemoteDataSource>(
       () => ProductRemoteDataSourceImpl(client: serviceLocator<http.Client>()));
 
+  serviceLocator.registerLazySingleton<UserLocalDataSource>(() =>
+      UserLocalDataSourceImpl(
+          sharedPreferences: serviceLocator<SharedPreferences>()));
+
+  serviceLocator.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl(client: serviceLocator<http.Client>()));
   // Repository
   serviceLocator
       .registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl(
@@ -50,6 +64,12 @@ Future<void> setupLocator() async {
             remoteDataSource: serviceLocator<ProductRemoteDataSource>(),
             networkInfo: serviceLocator<NetworkInfo>(),
           ));
+
+  serviceLocator.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
+        localDataSource: serviceLocator<UserLocalDataSource>(),
+        remoteDataSource: serviceLocator<UserRemoteDataSource>(),
+        networkInfo: serviceLocator<NetworkInfo>(),
+      ));
 
   // Use Cases
   serviceLocator.registerLazySingleton(
@@ -63,12 +83,25 @@ Future<void> setupLocator() async {
   serviceLocator.registerLazySingleton(
       () => UpdateProduct(serviceLocator<ProductRepository>()));
 
+  serviceLocator
+      .registerLazySingleton(() => Login(serviceLocator<UserRepository>()));
+  serviceLocator
+      .registerLazySingleton(() => Register(serviceLocator<UserRepository>()));
+  serviceLocator
+      .registerLazySingleton(() => GetUser(serviceLocator<UserRepository>()));
+
   // Bloc
-  serviceLocator.registerFactory(() => ProductBloc(
+  serviceLocator.registerFactory<ProductBloc>(() => ProductBloc(
         createNewProduct: serviceLocator<CreateNewProduct>(),
         getSpecificProduct: serviceLocator<GetSpecificProduct>(),
         getAllProducts: serviceLocator<GetAllProducts>(),
         deleteProduct: serviceLocator<DeleteProduct>(),
         updateProduct: serviceLocator<UpdateProduct>(),
+      ));
+
+  serviceLocator.registerFactory<UserBloc>(() => UserBloc(
+        login: serviceLocator<Login>(),
+        register: serviceLocator<Register>(),
+        getUser: serviceLocator<GetUser>(),
       ));
 }
